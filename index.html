@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color" content="#243b32">
+
+<title>Ziri AI - Your Daily Life Guide</title>
+
+<style>
+
+* {
+
+    box-sizing: border-box;
+
+}
+
+body {
+
+    margin: 0;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: #f5f4ee;
+
+    color: #29332e;
+
+}
+
+header {
+
+    background: #243b32;
+
+    color: white;
+
+    padding: 28px 22px;
+
+}
+
+.header-content {
+
+    max-width: 850px;
+
+    margin: auto;
+
+}
+
+.logo {
+
+    font-size: 28px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+}
+
+.tagline {
+
+    color: #d3dfd5;
+
+    margin-top: 8px;
+
+    font-size: 14px;
+
+}
+
+nav {
+
+    display: flex;
+
+    gap: 8px;
+
+    padding: 14px;
+
+    background: white;
+
+    overflow-x: auto;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 10;
+
+}
+
+nav button {
+
+    border: 0;
+
+    border-radius: 22px;
+
+    padding: 11px 17px;
+
+    background: #edf0eb;
+
+    color: #29332e;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+}
+
+nav button.active {
+
+    background: #294c3b;
+
+    color: white;
+
+}
+
+main {
+
+    max-width: 850px;
+
+    margin: auto;
+
+    padding: 20px 15px 50px;
+
+}
+
+.page {
+
+    display: none;
+
+}
+
+.page.active {
+
+    display: block;
+
+}
+
+h2 {
+
+    font-size: 23px;
+
+    margin-top: 10px;
+
+}
+
+.subtitle {
+
+    color: #778078;
+
+    line-height: 1.7;
+
+}
+
+.card {
+
+    background: white;
+
+    border-radius: 17px;
+
+    padding: 21px;
+
+    margin: 15px 0;
+
+    box-shadow: 0 3px 15px rgba(0,0,0,0.035);
+
+}
+
+.card h3 {
+
+    margin-top: 0;
+
+    color: #294c3b;
+
+}
+
+.highlight {
+
+    background: #e8eee6;
+
+    border-radius: 14px;
+
+    padding: 18px;
+
+    line-height: 1.8;
+
+}
+
+button.primary {
+
+    background: #294c3b;
+
+    color: white;
+
+    border: 0;
+
+    border-radius: 10px;
+
+    padding: 13px 20px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+}
+
+button.secondary {
+
+    background: #edf0eb;
+
+    color: #294c3b;
+
+    border: 0;
+
+    border-radius: 10px;
+
+    padding: 12px 18px;
+
+    cursor: pointer;
+
+}
+
+input, select, textarea {
+
+    display: block;
+
+    width: 100%;
+
+    padding: 13px;
+
+    margin: 8px 0 17px;
+
+    border: 1px solid #dce1da;
+
+    border-radius: 10px;
+
+    background: #fff;
+
+    font-size: 15px;
+
+}
+
+textarea {
+
+    min-height: 110px;
+
+    resize: vertical;
+
+}
+
+label {
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+}
+
+.result {
+
+    margin-top: 18px;
+
+    padding: 17px;
+
+    border-radius: 12px;
+
+    background: #e8eee6;
+
+    line-height: 1.8;
+
+    display: none;
+
+}
+
+footer {
+
+    text-align: center;
+
+    color: #89928a;
+
+    font-size: 12px;
+
+    padding: 25px;
+
+}
+
+.small-note {
+
+    font-size: 12px;
+
+    color: #89928a;
+
+    line-height: 1.7;
+
+}
+
+@media (max-width: 480px) {
+
+    header {
+
+        padding: 23px 18px;
+
+    }
+
+    .logo {
+
+        font-size: 25px;
+
+    }
+
+    main {
+
+        padding: 15px 12px 40px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="header-content">
+
+        <div class="logo">ZIRI AI</div>
+
+        <div class="tagline">Your Daily Guide to Life, Wisdom and Balance</div>
+
+    </div>
+
+</header>
+
+<nav>
+
+    <button class="active" onclick="showPage('today', this)">Today</button>
+
+    <button onclick="showPage('profile', this)">My Profile</button>
+
+    <button onclick="showPage('yijing', this)">I Ching</button>
+
+    <button onclick="showPage('assistant', this)">AI Assistant</button>
+
+</nav>
+
+<main>
+
+<section class="page active" id="today">
+
+    <h2>Your Daily Guide</h2>
+
+    <p class="subtitle">A fresh perspective for a more thoughtful day.</p>
+
+    <div class="card">
+
+        <h3>Today's Theme</h3>
+
+        <div class="highlight">
+
+            <strong>Stay Calm and Move Forward</strong>
+
+            <p>Focus on what matters. Small, consistent actions can create meaningful progress.</p>
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <h3>Today's Suggestions</h3>
+
+        <p><strong>Work:</strong> Prioritize one important task before starting something new.</p>
+
+        <p><strong>Relationships:</strong> Listen carefully and communicate clearly.</p>
+
+        <p><strong>Personal Growth:</strong> Make time to learn something useful.</p>
+
+        <p><strong>Well-being:</strong> Take a short break and get some fresh air.</p>
+
+    </div>
+
+    <div class="card">
+
+        <h3>Daily Reflection</h3>
+
+        <p>What is one thing you can do today to make tomorrow better?</p>
+
+    </div>
+
+</section>
+
+<section class="page" id="profile">
+
+    <h2>Personal Profile</h2>
+
+    <p class="subtitle">Create your personal profile for a more customized experience.</p>
+
+    <div class="card">
+
+        <label for="userName">Name or Nickname</label>
+
+        <input id="userName" type="text" placeholder="Enter your name">
+
+        <label for="birthType">Date of Birth Type</label>
+
+        <select id="birthType">
+
+            <option value="Gregorian">Gregorian Calendar</option>
+
+            <option value="Lunar">Lunar Calendar</option>
+
+        </select>
+
+        <label for="birthDate">Date of Birth</label>
+
+        <input id="birthDate" type="date">
+
+        <label for="birthTime">Time of Birth</label>
+
+        <select id="birthTime">
+
+            <option value="">Select birth time</option>
+
+            <option value="子时">Zi Hour</option>
+
+            <option value="丑时">Chou Hour</option>
+
+            <option value="寅时">Yin Hour</option>
+
+            <option value="卯时">Mao Hour</option>
+
+            <option value="辰时">Chen Hour</option>
+
+            <option value="巳时">Si Hour</option>
+
+            <option value="午时">Wu Hour</option>
+
+            <option value="未时">Wei Hour</option>
+
+            <option value="申时">Shen Hour</option>
+
+            <option value="酉时">You Hour</option>
+
+            <option value="戌时">Xu Hour</option>
+
+            <option value="亥时">Hai Hour</option>
+
+            <option value="Unknown">Unknown</option>
+
+        </select>
+
+        <label for="birthPlace">Place of Birth</label>
+
+        <input id="birthPlace" type="text" placeholder="City and country">
+
+        <button class="primary" onclick="saveProfile()">Save Profile</button>
+
+        <button class="secondary" onclick="loadProfile()">Load Profile</button>
+
+        <div class="result" id="profileResult"></div>
+
+    </div>
+
+    <p class="small-note">Your profile is saved in this browser on this device. It is not uploaded to a cloud account.</p>
+
+</section>
+
+<section class="page" id="yijing">
+
+    <h2>I Ching Wisdom</h2>
+
+    <p class="subtitle">Explore traditional Eastern philosophy as a tool for reflection.</p>
+
+    <div class="card">
+
+        <h3>Think About Your Question</h3>
+
+        <p>Describe a situation you would like to reflect on. Keep your question clear and specific.</p>
+
+        <textarea id="yijingQuestion" placeholder="Write your question here..."></textarea>
+
+        <button class="primary" onclick="prepareQuestion()">Prepare My Question</button>
+
+        <div class="result" id="yijingResult"></div>
+
+    </div>
+
+    <div class="card">
+
+        <h3>About the I Ching</h3>
+
+        <p>The I Ching is a traditional Chinese classic that explores change, balance and decision-making.</p>
+
+        <p>This section is an introductory reflection tool. It does not perform an authentic hexagram calculation or predict future events.</p>
+
+    </div>
+
+</section>
+
+<section class="page" id="assistant">
+
+    <h2>AI Life Assistant</h2>
+
+    <p class="subtitle">Organize your thoughts and explore possible solutions.</p>
+
+    <div class="card">
+
+        <h3>What would you like help with?</h3>
+
+        <textarea id="assistantQuestion" placeholder="Describe your question or situation..."></textarea>
+
+        <button class="primary" onclick="answerQuestion()">Submit Question</button>
+
+        <div class="result" id="assistantResult"></div>
+
+    </div>
+
+    <div class="card">
+
+        <h3>Things You Can Explore</h3>
+
+        <p>Personal development</p>
+
+        <p>Work and career planning</p>
+
+        <p>Relationships and communication</p>
+
+        <p>Daily decisions and reflection</p>
+
+        <p>Traditional Eastern philosophy</p>
+
+    </div>
+
+    <p class="small-note">This prototype does not connect to a real AI service. A secure AI API connection is needed to enable actual AI conversations.</p>
+
+</section>
+
+</main>
+
+<footer>
+
+    ZIRI AI · A Modern Approach to Eastern Wisdom
+
+</footer>
+
+<script>
+
+function showPage(pageId, button) {
+
+    document.querySelectorAll('.page').forEach(function(page) {
+
+        page.classList.remove('active');
+
+    });
+
+    document.querySelectorAll('nav button').forEach(function(item) {
+
+        item.classList.remove('active');
+
+    });
+
+    document.getElementById(pageId).classList.add('active');
+
+    if (button) {
+
+        button.classList.add('active');
+
+    }
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: 'smooth'
+
+    });
+
+}
+
+function saveProfile() {
+
+    const profile = {
+
+        name: document.getElementById('userName').value,
+
+        birthType: document.getElementById('birthType').value,
+
+        birthDate: document.getElementById('birthDate').value,
+
+        birthTime: document.getElementById('birthTime').value,
+
+        birthPlace: document.getElementById('birthPlace').value
+
+    };
+
+    localStorage.setItem('ziriProfile', JSON.stringify(profile));
+
+    const result = document.getElementById('profileResult');
+
+    result.style.display = 'block';
+
+    result.textContent = 'Your profile has been saved on this device.';
+
+}
+
+function loadProfile() {
+
+    const saved = localStorage.getItem('ziriProfile');
+
+    const result = document.getElementById('profileResult');
+
+    result.style.display = 'block';
+
+    if (!saved) {
+
+        result.textContent = 'No saved profile was found.';
+
+        return;
+
+    }
+
+    const profile = JSON.parse(saved);
+
+    document.getElementById('userName').value = profile.name || '';
+
+    document.getElementById('birthType').value = profile.birthType || 'Gregorian';
+
+    document.getElementById('birthDate').value = profile.birthDate || '';
+
+    document.getElementById('birthTime').value = profile.birthTime || '';
+
+    document.getElementById('birthPlace').value = profile.birthPlace || '';
+
+    result.textContent = 'Your saved profile has been loaded.';
+
+}
+
+function prepareQuestion() {
+
+    const question = document.getElementById('yijingQuestion').value.trim();
+
+    const result = document.getElementById('yijingResult');
+
+    result.style.display = 'block';
+
+    if (!question) {
+
+        result.textContent = 'Please enter a question first.';
+
+        return;
+
+    }
+
+    result.textContent =
+
+        'Your question: ' + question +
+
+        '\n\nTake a moment to consider the situation, the changes involved, and the choices available to you.' +
+
+        '\n\nThis is a reflection prompt, not an actual I Ching reading.';
+
+}
+
+function answerQuestion() {
+
+    const question = document.getElementById('assistantQuestion').value.trim();
+
+    const result = document.getElementById('assistantResult');
+
+    result.style.display = 'block';
+
+    if (!question) {
+
+        result.textContent = 'Please enter your question first.';
+
+        return;
+
+    }
+
+    result.textContent =
+
+        'Your question has been recorded in this session:\n\n' +
+
+        question +
+
+        '\n\nThe AI service has not been connected yet. Once a secure AI API is configured, this section can provide real AI responses.';
+
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+
+    loadProfile();
+
+});
+
+</script>
+
+</body>
+
+</html>
