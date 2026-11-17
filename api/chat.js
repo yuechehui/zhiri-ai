@@ -68,6 +68,7 @@ module.exports = async (req, res) => {
       })
     });
     if (!r.ok) {
+      console.error('UP',r.status,await r.text());
       return res.status(502).json({ error: 'The AI service returned an error. Please try again later.' });
     }
     const data = await r.json();
