@@ -1,705 +1,610 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <meta name="theme-color" content="#243b32">
-
-<title>Ziri AI - Your Daily Life Guide</title>
-
+<title>Zhiri AI - Your Daily Life Guide</title>
 <style>
-
 * {
-
     box-sizing: border-box;
-
 }
-
 body {
-
     margin: 0;
-
     font-family: Arial, Helvetica, sans-serif;
-
     background: #f5f4ee;
-
     color: #29332e;
-
 }
-
 header {
-
     background: #243b32;
-
     color: white;
-
     padding: 28px 22px;
-
 }
-
 .header-content {
-
     max-width: 850px;
-
     margin: auto;
-
 }
-
 .logo {
-
     font-size: 28px;
-
     font-weight: bold;
-
     letter-spacing: 2px;
-
 }
-
 .tagline {
-
     color: #d3dfd5;
-
     margin-top: 8px;
-
     font-size: 14px;
-
 }
-
 nav {
-
     display: flex;
-
     gap: 8px;
-
     padding: 14px;
-
     background: white;
-
     overflow-x: auto;
-
     position: sticky;
-
     top: 0;
-
     z-index: 10;
-
 }
-
 nav button {
-
     border: 0;
-
     border-radius: 22px;
-
     padding: 11px 17px;
-
     background: #edf0eb;
-
     color: #29332e;
-
     white-space: nowrap;
-
     cursor: pointer;
-
 }
-
 nav button.active {
-
     background: #294c3b;
-
     color: white;
-
 }
-
 main {
-
     max-width: 850px;
-
     margin: auto;
-
     padding: 20px 15px 50px;
-
 }
-
 .page {
-
     display: none;
-
 }
-
 .page.active {
-
     display: block;
-
 }
-
 h2 {
-
     font-size: 23px;
-
     margin-top: 10px;
-
 }
-
 .subtitle {
-
     color: #778078;
-
     line-height: 1.7;
-
 }
-
 .card {
-
     background: white;
-
     border-radius: 17px;
-
     padding: 21px;
-
     margin: 15px 0;
-
     box-shadow: 0 3px 15px rgba(0,0,0,0.035);
-
 }
-
 .card h3 {
-
     margin-top: 0;
-
     color: #294c3b;
-
 }
-
 .highlight {
-
     background: #e8eee6;
-
     border-radius: 14px;
-
     padding: 18px;
-
     line-height: 1.8;
-
 }
-
 button.primary {
-
     background: #294c3b;
-
     color: white;
-
     border: 0;
-
     border-radius: 10px;
-
     padding: 13px 20px;
-
     cursor: pointer;
-
     font-size: 15px;
-
 }
-
 button.secondary {
-
     background: #edf0eb;
-
     color: #294c3b;
-
     border: 0;
-
     border-radius: 10px;
-
     padding: 12px 18px;
-
     cursor: pointer;
-
 }
-
 input, select, textarea {
-
     display: block;
-
     width: 100%;
-
     padding: 13px;
-
     margin: 8px 0 17px;
-
     border: 1px solid #dce1da;
-
     border-radius: 10px;
-
     background: #fff;
-
     font-size: 15px;
-
 }
-
 textarea {
-
     min-height: 110px;
-
     resize: vertical;
-
 }
-
 label {
-
     font-size: 14px;
-
     font-weight: bold;
-
 }
-
 .result {
-
     margin-top: 18px;
-
     padding: 17px;
-
     border-radius: 12px;
-
     background: #e8eee6;
-
     line-height: 1.8;
-
     display: none;
-
 }
-
 footer {
-
     text-align: center;
-
     color: #89928a;
-
     font-size: 12px;
-
     padding: 25px;
-
 }
-
 .small-note {
-
     font-size: 12px;
-
     color: #89928a;
-
     line-height: 1.7;
-
 }
-
+.hex-symbol {
+    font-size: 52px;
+    line-height: 1.2;
+    color: #294c3b;
+}
+.hex-lines {
+    font-family: monospace;
+    font-size: 18px;
+    line-height: 1.9;
+    color: #29332e;
+}
+.hex-lines .changing {
+    color: #9a6a2f;
+    font-weight: bold;
+}
 @media (max-width: 480px) {
-
     header {
-
         padding: 23px 18px;
-
     }
-
     .logo {
-
         font-size: 25px;
-
     }
-
     main {
-
         padding: 15px 12px 40px;
-
     }
-
 }
-
 </style>
-
 </head>
-
 <body>
-
 <header>
-
     <div class="header-content">
-
-        <div class="logo">ZIRI AI</div>
-
+        <div class="logo">ZHIRI AI</div>
         <div class="tagline">Your Daily Guide to Life, Wisdom and Balance</div>
-
     </div>
-
 </header>
-
 <nav>
-
     <button class="active" onclick="showPage('today', this)">Today</button>
-
     <button onclick="showPage('profile', this)">My Profile</button>
-
     <button onclick="showPage('yijing', this)">I Ching</button>
-
     <button onclick="showPage('assistant', this)">AI Assistant</button>
-
 </nav>
-
 <main>
-
 <section class="page active" id="today">
-
     <h2>Your Daily Guide</h2>
-
-    <p class="subtitle">A fresh perspective for a more thoughtful day.</p>
-
+    <p class="subtitle" id="todayDate">A fresh perspective for a more thoughtful day.</p>
     <div class="card">
-
         <h3>Today's Theme</h3>
-
         <div class="highlight">
-
-            <strong>Stay Calm and Move Forward</strong>
-
-            <p>Focus on what matters. Small, consistent actions can create meaningful progress.</p>
-
+            <strong id="todayThemeTitle">Stay Calm and Move Forward</strong>
+            <p id="todayThemeText">Focus on what matters. Small, consistent actions can create meaningful progress.</p>
         </div>
-
     </div>
-
     <div class="card">
-
         <h3>Today's Suggestions</h3>
-
-        <p><strong>Work:</strong> Prioritize one important task before starting something new.</p>
-
-        <p><strong>Relationships:</strong> Listen carefully and communicate clearly.</p>
-
-        <p><strong>Personal Growth:</strong> Make time to learn something useful.</p>
-
-        <p><strong>Well-being:</strong> Take a short break and get some fresh air.</p>
-
+        <p><strong>Work:</strong> <span id="todayWork">Prioritize one important task before starting something new.</span></p>
+        <p><strong>Relationships:</strong> <span id="todayRelationships">Listen carefully and communicate clearly.</span></p>
+        <p><strong>Personal Growth:</strong> <span id="todayGrowth">Make time to learn something useful.</span></p>
+        <p><strong>Well-being:</strong> <span id="todayWellbeing">Take a short break and get some fresh air.</span></p>
     </div>
-
     <div class="card">
-
         <h3>Daily Reflection</h3>
-
-        <p>What is one thing you can do today to make tomorrow better?</p>
-
+        <p id="todayReflection">What is one thing you can do today to make tomorrow better?</p>
     </div>
-
 </section>
-
 <section class="page" id="profile">
-
     <h2>Personal Profile</h2>
-
     <p class="subtitle">Create your personal profile for a more customized experience.</p>
-
     <div class="card">
-
         <label for="userName">Name or Nickname</label>
-
         <input id="userName" type="text" placeholder="Enter your name">
-
         <label for="birthType">Date of Birth Type</label>
-
         <select id="birthType">
-
             <option value="Gregorian">Gregorian Calendar</option>
-
             <option value="Lunar">Lunar Calendar</option>
-
         </select>
-
         <label for="birthDate">Date of Birth</label>
-
         <input id="birthDate" type="date">
-
         <label for="birthTime">Time of Birth</label>
-
         <select id="birthTime">
-
             <option value="">Select birth time</option>
-
             <option value="子时">Zi Hour</option>
-
             <option value="丑时">Chou Hour</option>
-
             <option value="寅时">Yin Hour</option>
-
             <option value="卯时">Mao Hour</option>
-
             <option value="辰时">Chen Hour</option>
-
             <option value="巳时">Si Hour</option>
-
             <option value="午时">Wu Hour</option>
-
             <option value="未时">Wei Hour</option>
-
             <option value="申时">Shen Hour</option>
-
             <option value="酉时">You Hour</option>
-
             <option value="戌时">Xu Hour</option>
-
             <option value="亥时">Hai Hour</option>
-
             <option value="Unknown">Unknown</option>
-
         </select>
-
         <label for="birthPlace">Place of Birth</label>
-
         <input id="birthPlace" type="text" placeholder="City and country">
-
         <button class="primary" onclick="saveProfile()">Save Profile</button>
-
         <button class="secondary" onclick="loadProfile()">Load Profile</button>
-
         <div class="result" id="profileResult"></div>
-
+        <div class="result" id="lunarResult"></div>
     </div>
-
     <p class="small-note">Your profile is saved in this browser on this device. It is not uploaded to a cloud account.</p>
-
 </section>
 
 <section class="page" id="yijing">
-
     <h2>I Ching Wisdom</h2>
-
     <p class="subtitle">Explore traditional Eastern philosophy as a tool for reflection.</p>
-
     <div class="card">
-
         <h3>Think About Your Question</h3>
-
         <p>Describe a situation you would like to reflect on. Keep your question clear and specific.</p>
-
         <textarea id="yijingQuestion" placeholder="Write your question here..."></textarea>
-
-        <button class="primary" onclick="prepareQuestion()">Prepare My Question</button>
-
+        <button class="primary" onclick="castHexagram()">Cast the Coins</button>
         <div class="result" id="yijingResult"></div>
-
     </div>
-
     <div class="card">
-
         <h3>About the I Ching</h3>
-
         <p>The I Ching is a traditional Chinese classic that explores change, balance and decision-making.</p>
-
-        <p>This section is an introductory reflection tool. It does not perform an authentic hexagram calculation or predict future events.</p>
-
+        <p>This page performs a real three-coin cast: three coins are tossed for each of the six lines, from the bottom line up, and the resulting hexagram is matched against the 64 hexagrams of the King Wen sequence. Changing lines point to a second, changed hexagram.</p>
+        <p>This is a reflection tool, not a prediction of future events. Use it to think about a situation from a different angle.</p>
     </div>
-
 </section>
 
 <section class="page" id="assistant">
-
     <h2>AI Life Assistant</h2>
-
     <p class="subtitle">Organize your thoughts and explore possible solutions.</p>
-
     <div class="card">
-
         <h3>What would you like help with?</h3>
-
         <textarea id="assistantQuestion" placeholder="Describe your question or situation..."></textarea>
-
         <button class="primary" onclick="answerQuestion()">Submit Question</button>
-
         <div class="result" id="assistantResult"></div>
-
     </div>
-
     <div class="card">
-
         <h3>Things You Can Explore</h3>
-
         <p>Personal development</p>
-
         <p>Work and career planning</p>
-
         <p>Relationships and communication</p>
-
         <p>Daily decisions and reflection</p>
-
         <p>Traditional Eastern philosophy</p>
-
     </div>
-
-    <p class="small-note">This prototype does not connect to a real AI service. A secure AI API connection is needed to enable actual AI conversations.</p>
-
+    <p class="small-note">This page calls /api/chat on the same site. To enable real AI answers, deploy the backend on Vercel with your AI API key set as an environment variable (see README). Your API key is never stored in this page.</p>
 </section>
-
 </main>
-
 <footer>
-
-    ZIRI AI · A Modern Approach to Eastern Wisdom
-
+    Zhiri AI · A Modern Approach to Eastern Wisdom
 </footer>
-
 <script>
-
 function showPage(pageId, button) {
-
     document.querySelectorAll('.page').forEach(function(page) {
-
         page.classList.remove('active');
-
     });
-
     document.querySelectorAll('nav button').forEach(function(item) {
-
         item.classList.remove('active');
-
     });
-
     document.getElementById(pageId).classList.add('active');
-
     if (button) {
-
         button.classList.add('active');
-
     }
-
     window.scrollTo({
-
         top: 0,
-
         behavior: 'smooth'
-
     });
+}
 
+// 30 daily guides, one per day, rotating by day of year.
+var DAILY_GUIDES = [
+{ theme: "Stay Calm and Move Forward", guidance: "Focus on what matters. Small, consistent actions can create meaningful progress.", work: "Prioritize one important task before starting something new.", relationships: "Listen carefully and communicate clearly.", growth: "Make time to learn something useful.", wellbeing: "Take a short break and get some fresh air.", reflection: "What is one thing you can do today to make tomorrow better?" },
+{ theme: "Begin with One Step", guidance: "A long road is walked one step at a time. Start where you are.", work: "Break today's biggest task into the smallest first step.", relationships: "Send a short message to someone you have not spoken to in a while.", growth: "Read five pages of something that challenges you.", wellbeing: "Stretch for five minutes before your first meeting.", reflection: "What small step have you been putting off?" },
+{ theme: "Listen Before Speaking", guidance: "Understanding comes before being understood.", work: "In your next meeting, ask one question before giving an opinion.", relationships: "Let someone finish their story without interrupting.", growth: "Write down one thing you learned from another person today.", wellbeing: "Take three slow breaths before replying to a difficult message.", reflection: "Whose words did you truly hear today?" },
+{ theme: "Do Less, Better", guidance: "Fewer tasks, done well, bring more peace than many done halfway.", work: "Choose three tasks only. Let the rest wait.", relationships: "Give one person your full attention today.", growth: "Finish one small thing you started long ago.", wellbeing: "End the day one hour earlier than usual.", reflection: "What could you let go of today?" },
+{ theme: "Water the Roots", guidance: "Strong trees grow from quiet, unseen care.", work: "Invest time in the basics that support your bigger goals.", relationships: "Thank someone who supports you behind the scenes.", growth: "Practice a basic skill for fifteen minutes.", wellbeing: "Drink water before coffee today.", reflection: "What is one quiet habit that keeps you steady?" },
+{ theme: "Embrace the In-Between", guidance: "Not every moment needs a purpose. Rest is part of the path.", work: "Leave a gap between meetings; do not stack them back to back.", relationships: "Enjoy a meal together without phones on the table.", growth: "Sit quietly for ten minutes and notice your thoughts.", wellbeing: "Go for a slow walk with no destination.", reflection: "When did you last do nothing on purpose?" },
+{ theme: "Speak with Kindness", guidance: "A gentle word can open a door that force cannot.", work: "Phrase one piece of feedback as encouragement first.", relationships: "Say something kind to a family member today.", growth: "Learn one new phrase of praise in another language.", wellbeing: "Smile at a stranger; notice how it feels.", reflection: "What words of yours mattered most recently?" },
+{ theme: "Order from Chaos", guidance: "Tidy one corner and the whole room feels lighter.", work: "Clear your desk before you start working.", relationships: "Resolve one small misunderstanding instead of letting it grow.", growth: "Organize your notes from the past week.", wellbeing: "Make your bed first thing in the morning.", reflection: "What small mess, cleared, would free your mind?" },
+{ theme: "Patience Is Strength", guidance: "The seed grows in silence before it breaks the soil.", work: "Let a difficult project take its time; check progress weekly, not hourly.", relationships: "Give someone time to answer; do not rush them.", growth: "Spend twenty minutes on a skill that shows no quick results.", wellbeing: "Sleep a full night; growth happens in rest too.", reflection: "Where in your life is patience already paying off?" },
+{ theme: "Choose Your Battles", guidance: "Not every hill is worth climbing today.", work: "Say no to one request that does not serve your main goal.", relationships: "Let one small annoyance pass without a reply.", growth: "Focus your learning on one topic this week.", wellbeing: "Protect one hour of the day for yourself.", reflection: "What are you fighting that is not worth winning?" },
+{ theme: "Gratitude Opens the Day", guidance: "Count what you have before chasing what you lack.", work: "Start work by noting one thing that went well yesterday.", relationships: "Tell someone you appreciate them — specifically.", growth: "Write down three things you are grateful for.", wellbeing: "Eat one meal slowly, tasting each bite.", reflection: "What did today give you that you did not expect?" },
+{ theme: "Move Like Water", guidance: "Water does not fight the rock; it finds a way around.", work: "When blocked, change your approach instead of pushing harder.", relationships: "If a conversation stalls, try a different question.", growth: "Learn by watching how others solve the same problem.", wellbeing: "Do gentle exercise instead of a hard workout today.", reflection: "Where could you flow instead of forcing?" },
+{ theme: "Honesty with Yourself", guidance: "The first person to be honest with is yourself.", work: "Admit one task you have been avoiding and name the reason.", relationships: "Say what you truly feel to someone you trust.", growth: "Write one page about what you really want this year.", wellbeing: "Notice when you are tired and rest without guilt.", reflection: "What truth have you been circling around?" },
+{ theme: "Small Wins Count", guidance: "A single brick, laid well, is still progress.", work: "Finish one small task before lunch and enjoy the feeling.", relationships: "Celebrate a friend's small success with them.", growth: "Learn one new word and use it today.", wellbeing: "Take the stairs once today.", reflection: "What small win can you claim today?" },
+{ theme: "Balance Work and Rest", guidance: "A bow kept strung loses its spring.", work: "Stop work at a set time and keep the promise.", relationships: "Spend one evening fully with family, work phone away.", growth: "Alternate focused work with short breaks.", wellbeing: "Get outside for sunlight in the morning.", reflection: "Where is your life out of balance right now?" },
+{ theme: "Learn from Setbacks", guidance: "A fall is a lesson written on the ground.", work: "Review one recent mistake and write down what it taught you.", relationships: "Apologize once, sincerely, and move forward.", growth: "Study how someone you admire recovered from failure.", wellbeing: "Treat yourself kindly after a hard day.", reflection: "What has a past setback taught you that you still use?" },
+{ theme: "Simplify Your Space", guidance: "Less clutter, more room to breathe.", work: "Remove one unnecessary step from a daily routine.", relationships: "Keep one conversation simple and direct today.", growth: "Unsubscribe from one thing that no longer serves you.", wellbeing: "Clear one drawer or shelf.", reflection: "What could be simpler than it is now?" },
+{ theme: "Courage in Small Doses", guidance: "Courage is not the absence of fear; it is one step taken anyway.", work: "Raise one idea in a meeting even if your voice shakes.", relationships: "Have the honest conversation you have been avoiding.", growth: "Try something new that might not work.", wellbeing: "Do one thing today that makes you slightly nervous.", reflection: "What would you do if you were a little braver?" },
+{ theme: "The Power of Routine", guidance: "A steady rhythm carries you through unsteady days.", work: "Start work at the same time every morning this week.", relationships: "Create a small daily ritual with someone you love.", growth: "Practice at the same hour each day, even briefly.", wellbeing: "Keep a regular sleep and wake time.", reflection: "Which of your routines truly supports you?" },
+{ theme: "Give Before Asking", guidance: "Generosity returns in ways you cannot plan.", work: "Help a colleague with no expectation of return.", relationships: "Offer help before someone has to ask.", growth: "Share something useful you learned with others.", wellbeing: "Give yourself the rest you would give a friend.", reflection: "What can you offer today without keeping score?" },
+{ theme: "See the Whole Picture", guidance: "Step back and the pattern becomes clear.", work: "Before deciding, list the long-term effects, not just today's.", relationships: "Consider the other person's whole day before judging one moment.", growth: "Read about a topic outside your usual field.", wellbeing: "Look at the sky for a minute; remember the scale of things.", reflection: "What are you too close to see clearly?" },
+{ theme: "Rest Is Productive", guidance: "The field must lie fallow to bear fruit again.", work: "Schedule one real break into your workday and take it.", relationships: "Rest together — a quiet evening counts as time together.", growth: "Let your mind wander; new ideas often arrive then.", wellbeing: "Nap for twenty minutes if you can.", reflection: "What does your body ask for when you truly listen?" },
+{ theme: "Keep Your Word", guidance: "Trust is built one kept promise at a time.", work: "Deliver one thing exactly when you said you would.", relationships: "Keep a small promise to someone today.", growth: "Set one goal for the week and report to yourself honestly.", wellbeing: "Promise yourself one healthy choice and keep it.", reflection: "Which promise, kept, would change the most?" },
+{ theme: "Change Begins Within", guidance: "You cannot calm the wind, but you can adjust your sails.", work: "Change your own approach before blaming the situation.", relationships: "If a relationship is tense, change your part first.", growth: "Notice one habit and gently reshape it.", wellbeing: "Breathe deeply when stress rises; respond, do not react.", reflection: "What is one thing only you can change?" },
+{ theme: "Find Joy in Ordinary Days", guidance: "Happiness often hides in the everyday.", work: "Notice one pleasant moment at work today.", relationships: "Laugh with someone over something small.", growth: "Keep a note of one good thing each day.", wellbeing: "Enjoy a simple pleasure: tea, sun, a song.", reflection: "What ordinary moment today was quietly good?" },
+{ theme: "Prepare, Then Let Go", guidance: "Do your best, then release the outcome.", work: "Prepare thoroughly for tomorrow, then stop worrying about it.", relationships: "Say what you need to say, then let the other person decide.", growth: "Study well, then trust what you have learned.", wellbeing: "Stretch, breathe, and release the tension in your shoulders.", reflection: "What are you holding too tightly?" },
+{ theme: "Walk Your Own Path", guidance: "Comparison steals the joy of your own journey.", work: "Measure today against your yesterday, not someone else's today.", relationships: "Appreciate others without measuring yourself against them.", growth: "Choose one goal that is truly yours.", wellbeing: "Spend time alone doing something you love.", reflection: "Whose path have you been walking instead of your own?" },
+{ theme: "The Middle Way", guidance: "Neither too much nor too little — find the center.", work: "Work hard, but stop before exhaustion.", relationships: "Be honest, but kind; be kind, but honest.", growth: "Learn steadily, not in bursts.", wellbeing: "Eat enough to feel satisfied, not stuffed.", reflection: "Where do you lean too far to one side?" },
+{ theme: "Endings Are Beginnings", guidance: "Every closing door opens a window somewhere.", work: "Finish one project properly before starting the next.", relationships: "Let go of one old grudge today.", growth: "Close one chapter of learning and begin the next.", wellbeing: "End the day by tidying your space for tomorrow.", reflection: "What ending are you ready to make?" },
+{ theme: "Return to the Source", guidance: "When lost, go back to what matters most.", work: "Revisit the original reason you started this work.", relationships: "Call the person who has known you longest.", growth: "Reread something that first inspired you.", wellbeing: "Spend time in nature, even briefly.", reflection: "What first made you start this journey?" }
+];
+
+function renderToday() {
+    var now = new Date();
+    var startOfYear = new Date(now.getFullYear(), 0, 1);
+    var dayOfYear = Math.floor((now - startOfYear) / 86400000);
+    var guide = DAILY_GUIDES[dayOfYear % DAILY_GUIDES.length];
+    document.getElementById('todayDate').textContent = now.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) + ' · Day ' + (dayOfYear + 1) + ' of ' + now.getFullYear();
+    document.getElementById('todayThemeTitle').textContent = guide.theme;
+    document.getElementById('todayThemeText').textContent = guide.guidance;
+    document.getElementById('todayWork').textContent = guide.work;
+    document.getElementById('todayRelationships').textContent = guide.relationships;
+    document.getElementById('todayGrowth').textContent = guide.growth;
+    document.getElementById('todayWellbeing').textContent = guide.wellbeing;
+    document.getElementById('todayReflection').textContent = guide.reflection;
+}
+
+// 64 hexagrams, King Wen sequence. Each entry:
+// [line pattern bottom-to-top ('1' = yang/solid, '0' = yin/broken), number, Chinese name, pinyin, upper trigram, lower trigram, guidance]
+var HEXAGRAMS = [
+['111111',1,'乾','Qian','Qian','Qian','Lead with strength and integrity; the time favors steady, principled action.'],
+['000000',2,'坤','Kun','Kun','Kun','Receive and support. Quiet endurance now builds lasting ground.'],
+['001010',3,'屯','Zhun','Kan','Zhen','Beginnings are hard. Stay patient and gather your strength before moving.'],
+['010100',4,'蒙','Meng','Gen','Kan','Learn before acting. Ask for guidance and stay open to teaching.'],
+['111010',5,'需','Xu','Kan','Qian','Wait with confidence. Prepare while the right moment gathers.'],
+['010111',6,'訟','Song','Qian','Kan','Avoid open conflict. Seek a fair middle path and keep your words measured.'],
+['010000',7,'師','Shi','Kun','Kan','Discipline and clear direction win. Organize your people and your purpose.'],
+['000010',8,'比','Bi','Kan','Kun','Stand together. Choose allies you trust and hold the group close.'],
+['111110',9,'小畜','Xiao Xu','Xun','Qian','Small restraints now. Gentle persistence will slowly open the way.'],
+['011111',10,'履','Lü','Qian','Dui','Walk carefully and with courtesy. Respect brings safe passage.'],
+['111000',11,'泰','Tai','Kun','Qian','Harmony flows. Share the good and keep communication open.'],
+['000111',12,'否','Pi','Qian','Kun','Things are blocked. Step back, stay upright, and wait for the turn.'],
+['101111',13,'同人','Tong Ren','Qian','Li','Work with others openly. Shared purpose is stronger than going alone.'],
+['111101',14,'大有','Da You','Li','Qian','Abundance is here. Use it generously and stay modest.'],
+['100000',15,'謙','Qian','Kun','Gen','Modesty opens doors. Let your work speak, not your words.'],
+['000001',16,'豫','Yu','Zhen','Kun','Joy and readiness. Prepare well so delight can last.'],
+['001011',17,'隨','Sui','Dui','Zhen','Follow what is right. Adapt to the moment and move with it.'],
+['110100',18,'蠱','Gu','Gen','Xun','Fix what has decayed. Face the old problem and repair it patiently.'],
+['011000',19,'臨','Lin','Kun','Dui','Approach with care and confidence. The moment favors a steady hand.'],
+['000110',20,'觀','Guan','Xun','Kun','Observe before you act. Understanding the pattern comes first.'],
+['001101',21,'噬嗑','Shi He','Li','Zhen','Clear the obstacle directly. Decisive action removes what blocks the way.'],
+['101100',22,'賁','Bi','Gen','Li','Beauty in form. Attend to the details, but do not mistake polish for substance.'],
+['000100',23,'剝','Bo','Gen','Kun','What is worn must fall away. Hold to what is essential and endure.'],
+['001000',24,'復','Fu','Kun','Zhen','Return to your path. A new cycle begins quietly; welcome it.'],
+['001111',25,'無妄','Wu Wang','Qian','Zhen','Stay natural and sincere. Do not force what is not yours.'],
+['111100',26,'大畜','Da Xu','Gen','Qian','Gather strength. Study and store up before the great task.'],
+['001100',27,'頤','Yi','Gen','Zhen','Nourish yourself and others. Choose carefully what you take in.'],
+['110011',28,'大過','Da Guo','Dui','Xun','Great pressure. Stay centered and do not carry more than you must.'],
+['010010',29,'坎','Kan','Kan','Kan','Danger and depth. Keep moving steadily; do not panic in the dark.'],
+['101101',30,'離','Li','Li','Li','Clarity and light. Hold to what is true and let it guide you.'],
+['100011',31,'咸','Xian','Dui','Gen','Mutual feeling. Let the connection grow naturally, without forcing.'],
+['110001',32,'恆','Heng','Zhen','Xun','Endure with steadiness. Constancy, not intensity, carries the day.'],
+['100111',33,'遯','Dun','Qian','Gen','A wise retreat. Step back now to protect what matters.'],
+['111001',34,'大壯','Da Zhuang','Zhen','Qian','Great strength. Use it with restraint and right timing.'],
+['000101',35,'晉','Jin','Li','Kun','Advance in the light. Progress comes to those who act openly.'],
+['101000',36,'明夷','Ming Yi','Kun','Li','Light is hidden for now. Protect your inner clarity and wait.'],
+['101110',37,'家人','Jia Ren','Xun','Li','Family first. Order at home supports everything outside it.'],
+['011101',38,'睽','Kui','Li','Dui','Differences appear. Respect the distance; small steps can reconnect.'],
+['100010',39,'蹇','Jian','Kan','Gen','Obstacles on the road. Stop, reflect, and find another way forward.'],
+['010001',40,'解','Xie','Zhen','Kan','Release the tension. Forgiveness and movement open the way.'],
+['011100',41,'損','Sun','Gen','Dui','Less can be more. Give up something small to gain something lasting.'],
+['001110',42,'益','Yi','Xun','Zhen','Increase flows. Give generously and the return will follow.'],
+['111011',43,'夬','Guai','Dui','Qian','Decide clearly and act. Speak the truth, but with care.'],
+['110111',44,'姤','Gou','Qian','Xun','An unexpected meeting. Stay alert and keep your boundaries.'],
+['000011',45,'萃','Cui','Dui','Kun','Gathering together. Shared purpose draws people to you.'],
+['110000',46,'升','Sheng','Kun','Xun','Rise step by step. Steady effort lifts you higher than leaps.'],
+['010011',47,'困','Kun','Dui','Kan','Feeling confined. Hold your dignity; the way out appears in time.'],
+['110010',48,'井','Jing','Kan','Xun','The well is deep. Draw on lasting resources, not quick fixes.'],
+['101011',49,'革','Ge','Dui','Li','Change is due. Renew the form when the time is truly ripe.'],
+['110101',50,'鼎','Ding','Li','Xun','A new vessel. Nourish what is growing with steady care.'],
+['001001',51,'震','Zhen','Zhen','Zhen','Shock wakes you. Stay calm in the tremor; clarity follows.'],
+['100100',52,'艮','Gen','Gen','Gen','Stillness. Stop, rest, and let the situation settle.'],
+['100110',53,'漸','Jian','Xun','Gen','Gradual progress. Move step by step, like a tree growing.'],
+['011001',54,'歸妹','Gui Mei','Zhen','Dui','An unequal match. Proceed carefully and do not overreach.'],
+['101001',55,'豐','Feng','Zhen','Li','Abundance at its peak. Enjoy it, and prepare for change.'],
+['100101',56,'旅','Lü','Li','Gen',"A traveller's path. Stay light, respectful, and adaptable."],
+['110110',57,'巽','Xun','Xun','Xun','Gentle influence. Persist quietly and the wind will bend the grass.'],
+['011011',58,'兌','Dui','Dui','Dui','Joy in exchange. Open conversation brings lightness.'],
+['010110',59,'渙','Huan','Xun','Kan','Dispersion. Let go of what scatters you and gather your focus.'],
+['011010',60,'節','Jie','Kan','Dui','Healthy limits. Measure and rhythm keep life sustainable.'],
+['011110',61,'中孚','Zhong Fu','Xun','Dui','Inner truth. Sincerity reaches others without effort.'],
+['100001',62,'小過','Xiao Guo','Zhen','Gen','Small excess. Attend to details and stay modest in action.'],
+['101010',63,'既濟','Ji Ji','Kan','Li','Completion. Hold the order you have built; do not grow careless.'],
+['010101',64,'未濟','Wei Ji','Li','Kan','Not yet complete. The task continues — stay alert and hopeful.']
+];
+var HEXAGRAM_BY_PATTERN = {};
+HEXAGRAMS.forEach(function(h) { HEXAGRAM_BY_PATTERN[h[0]] = h; });
+
+function hexagramSymbol(number) {
+    return String.fromCodePoint(0x4DC0 + number - 1);
+}
+
+function castHexagram() {
+    var question = document.getElementById('yijingQuestion').value.trim();
+    var result = document.getElementById('yijingResult');
+    result.style.display = 'block';
+    if (!question) {
+        result.textContent = 'Please enter a question first.';
+        return;
+    }
+    // Three-coin method: three coins per line, six lines bottom to top.
+    // Heads = 3, tails = 2. 6 = old yin (changing), 7 = young yang,
+    // 8 = young yin, 9 = old yang (changing).
+    var lineValues = [];
+    var pattern = '';
+    var changedPattern = '';
+    var changingLines = [];
+    for (var i = 0; i < 6; i++) {
+        var sum = 0;
+        for (var c = 0; c < 3; c++) {
+            sum += Math.random() < 0.5 ? 3 : 2;
+        }
+        lineValues.push(sum);
+        var isYang = (sum === 7 || sum === 9);
+        pattern += isYang ? '1' : '0';
+        var changedYang = (sum === 6) ? true : (sum === 9 ? false : isYang);
+        changedPattern += changedYang ? '1' : '0';
+        if (sum === 6 || sum === 9) {
+            changingLines.push(i + 1);
+        }
+    }
+    var hex = HEXAGRAM_BY_PATTERN[pattern];
+    var changed = HEXAGRAM_BY_PATTERN[changedPattern];
+    var html = '<p><strong>Your question:</strong> ' + escapeHtml(question) + '</p>';
+    html += '<div class="hex-symbol">' + hexagramSymbol(hex[1]) + '</div>';
+    html += '<p><strong>' + hex[1] + '. ' + hex[2] + ' (' + hex[3] + ')</strong><br>Upper trigram: ' + hex[4] + ' · Lower trigram: ' + hex[5] + '</p>';
+    html += '<p>' + hex[6] + '</p>';
+    html += '<p><strong>Lines (bottom to top):</strong></p><div class="hex-lines">';
+    for (var j = 5; j >= 0; j--) {
+        var v = lineValues[j];
+        var lineText = (v === 7 || v === 9) ? '━━━━━━━' : '━━━&nbsp;&nbsp;&nbsp;━━━';
+        var mark = (v === 6 || v === 9) ? ' <span class="changing">✦ changing</span>' : '';
+        html += '<div' + ((v === 6 || v === 9) ? ' class="changing"' : '') + '>Line ' + (j + 1) + ': ' + lineText + mark + '</div>';
+    }
+    html += '</div>';
+    if (changingLines.length > 0 && changed && changed[1] !== hex[1]) {
+        html += '<hr><p><strong>Changing line' + (changingLines.length > 1 ? 's' : '') + ': ' + changingLines.join(', ') + '</strong></p>';
+        html += '<div class="hex-symbol">' + hexagramSymbol(changed[1]) + '</div>';
+        html += '<p><strong>Changed hexagram: ' + changed[1] + '. ' + changed[2] + ' (' + changed[3] + ')</strong><br>Upper trigram: ' + changed[4] + ' · Lower trigram: ' + changed[5] + '</p>';
+        html += '<p>' + changed[6] + '</p>';
+    } else if (changingLines.length === 0) {
+        html += '<p><em>No changing lines — the situation is steady for now.</em></p>';
+    }
+    html += '<p class="small-note">A reflection tool, not a prediction. Take the guidance as a prompt for thinking, not as a forecast.</p>';
+    result.innerHTML = html;
+}
+
+function escapeHtml(text) {
+    var div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+function getSavedProfile() {
+    try {
+        var saved = localStorage.getItem('ziriProfile');
+        return saved ? JSON.parse(saved) : null;
+    } catch (e) {
+        return null;
+    }
+}
+
+// Show the lunar date of a Gregorian birth date, using the browser's
+// built-in Chinese calendar. Returns a string, or null when unsupported.
+function lunarDateText(isoDate) {
+    if (!isoDate) return null;
+    var parts = isoDate.split('-');
+    if (parts.length !== 3) return null;
+    var d = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+    if (isNaN(d.getTime())) return null;
+    try {
+        var lunar = new Intl.DateTimeFormat('zh-CN-u-ca-chinese', { year: 'numeric', month: 'long', day: 'numeric' }).format(d);
+        var greg = new Intl.DateTimeFormat('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' }).format(d);
+        if (lunar === greg) return null; // browser fell back to Gregorian
+        return lunar;
+    } catch (e) {
+        return null;
+    }
+}
+
+function updateLunarDisplay() {
+    var lunarEl = document.getElementById('lunarResult');
+    var birthType = document.getElementById('birthType').value;
+    var birthDate = document.getElementById('birthDate').value;
+    lunarEl.style.display = 'none';
+    lunarEl.textContent = '';
+    if (birthType === 'Lunar' && birthDate) {
+        var lunar = lunarDateText(birthDate);
+        lunarEl.style.display = 'block';
+        if (lunar) {
+            lunarEl.textContent = 'Lunar date of ' + birthDate + ': ' + lunar + ' (Chinese lunar calendar).';
+        } else {
+            lunarEl.textContent = 'Lunar calendar is not supported in this browser, so the lunar date cannot be shown here.';
+        }
+    }
 }
 
 function saveProfile() {
-
     const profile = {
-
         name: document.getElementById('userName').value,
-
         birthType: document.getElementById('birthType').value,
-
         birthDate: document.getElementById('birthDate').value,
-
         birthTime: document.getElementById('birthTime').value,
-
         birthPlace: document.getElementById('birthPlace').value
-
     };
-
     localStorage.setItem('ziriProfile', JSON.stringify(profile));
-
     const result = document.getElementById('profileResult');
-
     result.style.display = 'block';
-
     result.textContent = 'Your profile has been saved on this device.';
-
+    updateLunarDisplay();
 }
 
 function loadProfile() {
-
-    const saved = localStorage.getItem('ziriProfile');
-
+    const profile = getSavedProfile();
     const result = document.getElementById('profileResult');
-
     result.style.display = 'block';
-
-    if (!saved) {
-
+    if (!profile) {
         result.textContent = 'No saved profile was found.';
-
         return;
-
     }
-
-    const profile = JSON.parse(saved);
-
     document.getElementById('userName').value = profile.name || '';
-
     document.getElementById('birthType').value = profile.birthType || 'Gregorian';
-
     document.getElementById('birthDate').value = profile.birthDate || '';
-
     document.getElementById('birthTime').value = profile.birthTime || '';
-
     document.getElementById('birthPlace').value = profile.birthPlace || '';
-
     result.textContent = 'Your saved profile has been loaded.';
-
+    updateLunarDisplay();
 }
 
-function prepareQuestion() {
-
-    const question = document.getElementById('yijingQuestion').value.trim();
-
-    const result = document.getElementById('yijingResult');
-
-    result.style.display = 'block';
-
-    if (!question) {
-
-        result.textContent = 'Please enter a question first.';
-
-        return;
-
-    }
-
-    result.textContent =
-
-        'Your question: ' + question +
-
-        '\n\nTake a moment to consider the situation, the changes involved, and the choices available to you.' +
-
-        '\n\nThis is a reflection prompt, not an actual I Ching reading.';
-
-}
-
-function answerQuestion() {
-
+async function answerQuestion() {
     const question = document.getElementById('assistantQuestion').value.trim();
-
     const result = document.getElementById('assistantResult');
-
     result.style.display = 'block';
-
     if (!question) {
-
         result.textContent = 'Please enter your question first.';
-
         return;
-
     }
-
-    result.textContent =
-
-        'Your question has been recorded in this session:\n\n' +
-
-        question +
-
-        '\n\nThe AI service has not been connected yet. Once a secure AI API is configured, this section can provide real AI responses.';
-
+    result.textContent = 'Asking Zhiri…';
+    var profile = getSavedProfile();
+    try {
+        const response = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ question: question, profile: profile })
+        });
+        const data = await response.json().catch(function() { return {}; });
+        if (response.ok && data.reply) {
+            result.textContent = data.reply;
+        } else if (response.status === 503 || response.status === 404) {
+            result.textContent = 'The AI backend is not connected yet. Deploy the backend on Vercel with your AI API key set as an environment variable (see README), then this section will give real AI answers.';
+        } else {
+            result.textContent = (data && data.error) ? data.error : 'Something went wrong. Please try again.';
+        }
+    } catch (e) {
+        result.textContent = 'The AI backend is not connected yet. Deploy the backend on Vercel with your AI API key set as an environment variable (see README), then this section will give real AI answers.';
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-
+    renderToday();
     loadProfile();
-
+    document.getElementById('birthType').addEventListener('change', updateLunarDisplay);
+    document.getElementById('birthDate').addEventListener('change', updateLunarDisplay);
 });
-
 </script>
-
 </body>
-
 </html>
